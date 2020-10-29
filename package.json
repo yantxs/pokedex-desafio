@@ -1,0 +1,19 @@
+{
+  "name": "pokedex-desafio",
+  "version": "1.0.0",
+  "description": "API REST onde os aventureiros podem consultar dados valiosos sobre os pokémons existentes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yantxs/pokedex-desafio.git"
+  },
+  "author": "@yantxs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yantxs/pokedex-desafio/issues"
+  },
+  "homepage": "https://github.com/yantxs/pokedex-desafio#readme"
+}
