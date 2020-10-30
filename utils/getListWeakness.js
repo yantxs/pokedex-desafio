@@ -14,8 +14,8 @@ module.exports = function(d, req){
             }
         }
         result['weakness_against']=poke
-        return result;
+        return [result,200];
     } 
     result['error']="Pokemon não encontrado."
-    return result;
+    return [result,404];
 };

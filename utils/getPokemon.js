@@ -2,9 +2,9 @@ module.exports = function(d, req){
     result = {};
     for(i in d.pokemon){
         if (d.pokemon[i].name.toLowerCase().valueOf() == req.params.name.toLowerCase().valueOf()){
-            return d.pokemon[i]
+            return [d.pokemon[i], 200]
         }
     }
     result["error"] = "Pokemon não encontrado."
-    return result;
+    return [result, 404];
 };

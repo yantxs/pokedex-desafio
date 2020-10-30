@@ -1,0 +1,182 @@
+define({ "api": [
+  {
+    "type": "get",
+    "url": "/api/v1/pokemon",
+    "title": "GetPokemonList",
+    "group": "Endpoints",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "pokemons",
+            "description": "<p>List of all existing pokemons.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Sucess",
+          "content": "HTTP/1.1 200 OK\n{\n  \"pokemons\": [\"Squirtle\", \"Bulbarsaur\", \"Pikachu\"...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./index.js",
+    "groupTitle": "Endpoints",
+    "name": "GetApiV1Pokemon"
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/pokemon/{name}",
+    "title": "GetPokemon",
+    "group": "Endpoints",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "pokemon",
+            "description": "<p>Details about informed pokemon</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Sucess",
+          "content": "   HTTP/1.1 200 OK\n{\n \"id\": 4,\n \"num\": \"004\",\n \"name\": \"Charmander\",\n \"img\": \"http://www.serebii.net/pokemongo/pokemon/004.png\",\n \"type\": [\n   \"Fire\"\n ],\n \"height\": \"0.61 m\",\n \"weight\": \"8.5 kg\",\n \"candy\": \"Charmander Candy\",\n \"candy_count\": 25,\n \"egg\": \"2 km\",\n \"spawn_chance\": 0.253,\n \"avg_spawns\": 25.3,\n \"spawn_time\": \"08:45\",\n \"multipliers\": [\n   1.65\n ],\n \"weaknesses\": [\n   \"Water\",\n   \"Ground\",\n   \"Rock\"\n ],\n \"next_evolution\": [\n   {\n     \"num\": \"005\",\n     \"name\": \"Charmeleon\"\n   },\n   {\n     \"num\": \"006\",\n     \"name\": \"Charizard\"\n   }\n ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Message error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error",
+          "content": "   HTTP/1.1 404 Not Found\n{\n    \"error\":\"Pokemon não encontrado\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./index.js",
+    "groupTitle": "Endpoints",
+    "name": "GetApiV1PokemonName"
+  },
+  {
+    "type": "post",
+    "url": "/api/v1/advantage/pokemon/{name}",
+    "title": "GetPokemonAdvantages",
+    "group": "Endpoints",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "advantage_against",
+            "description": "<p>Returns a list of pokemon that has disadvantages against the informed pokemon</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Sucess",
+          "content": "   HTTP/1.1 200 OK\n{\n \"advantage_against\": [\"Pikachu\", \"Bulbasaur\", \"Mewtwo\", \"Squirtle\"...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Message error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error",
+          "content": "   HTTP/1.1 404 Not Found\n{\n    \"error\":\"Pokemon não encontrado\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./index.js",
+    "groupTitle": "Endpoints",
+    "name": "PostApiV1AdvantagePokemonName"
+  },
+  {
+    "type": "post",
+    "url": "/api/v1/weakness/pokemon/{name}",
+    "title": "GetPokemonDisadvantages",
+    "group": "Endpoints",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String[]",
+            "optional": false,
+            "field": "weakness_against",
+            "description": "<p>Returns a list of pokemon that has advantages against the informed pokemon</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Sucess",
+          "content": "   HTTP/1.1 200 OK\n{\n \"weakness_against\": [\"Pikachu\", \"Bulbasaur\", \"Mewtwo\", \"Squirtle\"...]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "Object",
+            "optional": false,
+            "field": "error",
+            "description": "<p>Message error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error",
+          "content": "   HTTP/1.1 404 Not Found\n{\n    \"error\":\"Pokemon não encontrado\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./index.js",
+    "groupTitle": "Endpoints",
+    "name": "PostApiV1WeaknessPokemonName"
+  }
+] });
