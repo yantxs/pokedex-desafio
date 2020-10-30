@@ -43,7 +43,7 @@ app.get('/pokemon/:name', (req, res) => {
 
 app.post('/advantage/pokemon/:name', (req, res) => {
     https.get(url, response => {
-        var body = ''; var aux = [];var exists = false; var poke = []; var result = {};
+        var body = ''; var aux = []; var exists = false; var poke = []; var result = {};
         response.on('data', data => {
             body += data
         })
@@ -74,7 +74,7 @@ app.post('/advantage/pokemon/:name', (req, res) => {
 
 app.post('/weakness/pokemon/:name', (req, res) => {
     https.get(url, response => {
-        var body = ''; var aux = [];var exists = false; var poke = []; var result = {}
+        var body = ''; var aux = []; var exists = false; var poke = []; var result = {}
         response.on('data', data => {
             body += data
         })
