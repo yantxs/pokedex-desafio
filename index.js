@@ -3,6 +3,7 @@ const app = express()
 const https = require('https')
 
 var url = "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
+var port = process.env.PORT || 3000
 
 app.get('/pokemon', (req, res) => {
     https.get(url, response => {
@@ -104,6 +105,6 @@ app.post('/weakness/pokemon/:name', (req, res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log("Rodando na porta 3000")
+app.listen(port, () => {
+    console.log("Rodando na porta "+ port)
 })
