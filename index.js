@@ -5,7 +5,7 @@ const https = require('https')
 var url = "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
 var port = process.env.PORT || 3000
 
-app.get('/pokemon', (req, res) => {
+app.get('/api/v1/pokemon', (req, res) => {
     https.get(url, response => {
         var body = ''; var poke = []; var result = {};
         response.on('data', data => {
@@ -23,7 +23,7 @@ app.get('/pokemon', (req, res) => {
     })
 })
 
-app.get('/pokemon/:name', (req, res) => {
+app.get('/api/v1/pokemon/:name', (req, res) => {
     https.get(url, response => {
         var body = ''; var result = {};
         result["error"] = "Pokemon não encontrado."
@@ -42,7 +42,7 @@ app.get('/pokemon/:name', (req, res) => {
     })   
 })
 
-app.post('/advantage/pokemon/:name', (req, res) => {
+app.post('/api/v1/advantage/pokemon/:name', (req, res) => {
     https.get(url, response => {
         var body = ''; var aux = []; var exists = false; var poke = []; var result = {};
         response.on('data', data => {
@@ -73,7 +73,7 @@ app.post('/advantage/pokemon/:name', (req, res) => {
     })
 })
 
-app.post('/weakness/pokemon/:name', (req, res) => {
+app.post('/api/v1/weakness/pokemon/:name', (req, res) => {
     https.get(url, response => {
         var body = ''; var aux = []; var exists = false; var poke = []; var result = {}
         response.on('data', data => {
