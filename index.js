@@ -2,108 +2,70 @@ const express = require('express')
 const app = express()
 const https = require('https')
 
-var url = "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
-var port = process.env.PORT || 3000
+const getListAdvantages = require('./utils/getListAdvantages')
+const getPokemon = require('./utils/getPokemon')
+const getListWeakness = require('./utils/getListWeakness')
+const getListPokemon = require('./utils/getListPokemon')
+
+const url = "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
+const port = process.env.PORT || 3000 // heroku config port
 
 app.get('/api/v1/pokemon', (req, res) => {
     https.get(url, response => {
-        var body = ''; var poke = []; var result = {};
+        var body = ''; poke = []; result = {};
         response.on('data', data => {
             body += data
         })
         response.on('end', () => {
-            var d = JSON.parse(body); var poke = []
-            for(i in d.pokemon){
-                poke.push(d.pokemon[i].name)
-            }
-            result["pokemons"] = poke
+            var d = JSON.parse(body);
+            var result = getListPokemon(d);
             res.status(200).json(result) 
         }) 
     
     })
-})
+});
 
 app.get('/api/v1/pokemon/:name', (req, res) => {
     https.get(url, response => {
-        var body = ''; var result = {};
-        result["error"] = "Pokemon não encontrado."
+        var body = '';
         response.on('data', data => {
             body += data
         })
         response.on('end', () => {
             var d = JSON.parse(body)
-            for(i in d.pokemon){
-                if (d.pokemon[i].name.toLowerCase().valueOf() == req.params.name.toLowerCase().valueOf()){
-                    result = d.pokemon[i]
-                }
-            };
+            var result = getPokemon(d, req);
             res.status(200).json(result)
         }) 
     })   
-})
+});
 
 app.post('/api/v1/advantage/pokemon/:name', (req, res) => {
     https.get(url, response => {
-        var body = ''; var aux = []; var exists = false; var poke = []; var result = {};
+        var body = '';
         response.on('data', data => {
             body += data
         })
         response.on('end', () => {
             var d = JSON.parse(body)
-            for(i in d.pokemon){
-                if (d.pokemon[i].name.toLowerCase().valueOf() == req.params.name.toLowerCase().valueOf()){
-                    exists = true;
-                    type = d.pokemon[i].type
-                }
-            };
-            if (exists){
-                for(i in d.pokemon){
-                    aux = d.pokemon[i].weaknesses.filter(value => type.includes(value))
-                    if (aux.length > 0){
-                        poke.push(d.pokemon[i].name)
-                    }
-                }
-                result['advantage_against']=poke
-            
-            }else{
-                result['error']="Pokemon não encontrado."
-            }
-            res.status(200).json(result)
+            var result = getListAdvantages(d, req)
+            res.status(200).json(result);
         }) 
     })
-})
+});
 
 app.post('/api/v1/weakness/pokemon/:name', (req, res) => {
     https.get(url, response => {
-        var body = ''; var aux = []; var exists = false; var poke = []; var result = {}
+        var body = '';
         response.on('data', data => {
             body += data
         })
         response.on('end', () => {
             var d = JSON.parse(body)
-            for(i in d.pokemon){
-                if (d.pokemon[i].name.toLowerCase().valueOf() == req.params.name.toLowerCase().valueOf()){
-                    exists = true;
-                    weaknesses = d.pokemon[i].weaknesses
-                }
-            };
-
-            if (exists){
-                for(i in d.pokemon){
-                    aux = d.pokemon[i].type.filter(value => weaknesses.includes(value))
-                    if (aux.length > 0){
-                        poke.push(d.pokemon[i].name)
-                    }
-                }
-                result['weakness_against']=poke
-           
-            } else{
-                result['error']="Pokemon não encontrado."
-            }
+            var result = getListWeakness(d, req)
             res.status(200).json(result);        
         }) 
     })
-})
+});
 
 app.listen(port, () => {
     console.log("Rodando na porta "+ port)

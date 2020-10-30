@@ -30,7 +30,7 @@ Done! You server should be running on the port 3000! You can acess on http://loc
 
 ### Routes
 
-Below the ENDPOINTs of API
+Below, the ENDPOINTs of API
 
 | METHOD | ENDPOINT |RETURN |
 | ------ | ------ | ------ |
@@ -59,5 +59,5 @@ Copyright (c) 2020 [Yan Teixeira]
    [yarn]: <https://yarnpkg.com/>
    [Imnsonia]: <https://insomnia.rest/>
    [Postman]: <https://www.postman.com/>
-   [HERE]: <>
+   [HERE]: <https://pokechallengex.herokuapp.com/>
    [Yan Teixeira]: <https://www.linkedin.com/in/yan-teixeira/>
